@@ -27,3 +27,26 @@ dist-ssr
 .env
 .env.*
 !.env.example
+.env.e2e
+e2e/.auth/
+playwright-report/
+test-results/
+
+# E2E / Playwright
+blob-report/
+
+# Environment
+.env.local
+.env.*.local
+
+# Build
+dist/
+node_modules/
+
+# Local backups
+*.before-*
+*.backup
+*.bak
+
+# Editor / OS
+Thumbs.db
