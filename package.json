@@ -19,7 +19,8 @@
     "quality:full": "npm run quality:static && npm run test:e2e",
     "release:check": "npm run quality:full",
     "check:bundle": "node scripts/check-bundle-size.mjs",
-    "check:secrets": "node scripts/check-secrets.mjs"
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "screenshots:portfolio": "playwright test e2e/portfolio-screenshots.spec.ts --project=chromium"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

@@ -78,8 +78,10 @@ export default defineConfig({
         'setup',
       ],
 
-      testIgnore:
+      testIgnore: [
         /auth\.setup\.ts/,
+        /portfolio-screenshots\.spec\.ts/,
+      ],
     },
   ],
 

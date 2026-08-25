@@ -61,6 +61,33 @@ GitHub -> GitHub Actions -> Vercel
 
 Detailed architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
+
+## Product Screenshots
+
+### Executive Dashboard
+
+![Executive Dashboard](docs/screenshots/01-executive-dashboard.png)
+
+### Transaction Intelligence
+
+![Transaction Intelligence](docs/screenshots/02-transaction-intelligence.png)
+
+### Transaction Audit Trail
+
+![Transaction Audit Trail](docs/screenshots/03-transaction-audit-trail.png)
+
+### Governance Suite
+
+![Governance Suite](docs/screenshots/04-governance-suite.png)
+
+### Enterprise Risk
+
+![Enterprise Risk](docs/screenshots/05-enterprise-risk.png)
+
+### Consolidation Center
+
+![Consolidation Center](docs/screenshots/06-consolidation-center.png)
+
 ## Technology Stack
 
 | Layer | Technologies |
