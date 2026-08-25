@@ -321,17 +321,47 @@ useEffect(() => {
         setLoading(true);
         setError(null);
 
+        const loadInitialData = async () => {
+          return Promise.all([
+            getAudits(),
+            getFindings(),
+            getOrganizations(),
+            getTransactions(),
+          ]);
+        };
+
+        let initialData;
+
+        try {
+          initialData =
+            await loadInitialData();
+        } catch (firstError) {
+          console.warn(
+            'INITIAL LOAD RETRY:',
+            firstError
+          );
+
+          /*
+           * En producción Supabase puede tardar
+           * brevemente en restaurar/refrescar sesión
+           * después del primer render.
+           *
+           * Esperamos una sola vez y repetimos.
+           */
+          await new Promise((resolve) =>
+            setTimeout(resolve, 900)
+          );
+
+          initialData =
+            await loadInitialData();
+        }
+
         const [
           auditsData,
           findingsData,
           organizationsData,
           transactionsData,
-        ] = await Promise.all([
-          getAudits(),
-          getFindings(),
-          getOrganizations(),
-          getTransactions(),
-        ]);
+        ] = initialData;
 
         setAudits(auditsData);
         setFindings(findingsData);
