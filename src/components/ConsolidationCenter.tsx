@@ -185,7 +185,7 @@ export function ConsolidationCenter({
 
   useEffect(() => {
     if (open) {
-      void load()
+      queueMicrotask(() => void load())
     }
   }, [open])
 

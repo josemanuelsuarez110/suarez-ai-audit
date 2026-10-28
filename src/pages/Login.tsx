@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ShieldCheck, AlertCircle } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 
 export function Login() {
   const [email, setEmail] = useState('');

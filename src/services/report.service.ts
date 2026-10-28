@@ -341,7 +341,27 @@ export async function getReports(): Promise<StoredReport[]> {
   return (data ?? []).map(mapStoredReport)
 }
 
-function mapStoredReport(row: any): StoredReport {
+interface StoredReportRow {
+  id: string
+  report_code: string
+  audit_id: string
+  title: string
+  executive_summary: string | null
+  conclusion: string | null
+  status: string
+  auditor_name: string | null
+  approver_name: string | null
+  generated_at: string | null
+  approved_at: string | null
+  total_findings: number
+  critical_findings: number
+  high_findings: number
+  medium_findings: number
+  low_findings: number
+  audit_score: number | null
+}
+
+function mapStoredReport(row: StoredReportRow): StoredReport {
   return {
     id: row.id,
     reportCode: row.report_code,
@@ -349,7 +369,7 @@ function mapStoredReport(row: any): StoredReport {
     title: row.title,
     executiveSummary: row.executive_summary ?? '',
     conclusion: row.conclusion ?? '',
-    status: row.status,
+    status: row.status as ReportStatus,
     auditorName: row.auditor_name ?? '',
     approverName: row.approver_name ?? '',
     generatedAt: row.generated_at,

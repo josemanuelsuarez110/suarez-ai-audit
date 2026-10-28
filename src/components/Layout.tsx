@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 import { LogOut, User } from 'lucide-react';
 
 interface LayoutProps { children: ReactNode; }

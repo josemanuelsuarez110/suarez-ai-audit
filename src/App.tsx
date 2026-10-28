@@ -15,9 +15,10 @@ import {
   TrendingUp,
   X,
 } from 'lucide-react';
+import type { AppRole } from './context/auth-context';
 
 import { useEffect, useState } from 'react';
-import { useAuth } from './context/AuthContext';
+import { useAuth } from './context/useAuth';
 import { Login } from './pages/Login';
 import {
   createAudit,
@@ -312,7 +313,7 @@ function App() {
   });
 useEffect(() => {
     if (!user) {
-      setLoading(false);
+      queueMicrotask(() => setLoading(false));
       return;
     }
 
@@ -2271,11 +2272,11 @@ useEffect(() => {
               </div>
 
               <div className="mt-0.5 text-[9px] font-bold uppercase tracking-wider text-[#c9a227]">
-                {{
+                {({
                   admin: 'Administrador',
                   auditor: 'Auditor',
                   viewer: 'Consulta',
-                }[role ?? 'viewer']}
+                } as Record<AppRole, string>)[role ?? 'viewer']}
               </div>
             </div>
 

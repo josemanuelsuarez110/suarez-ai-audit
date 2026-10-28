@@ -1,20 +1,7 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { type User, type Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
-
-export type AppRole = 'admin' | 'auditor' | 'viewer';
-
-interface AuthContextType {
-  user: User | null;
-  session: Session | null;
-  loading: boolean;
-  role: AppRole | null;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
-  signOut: () => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext, type AppRole } from './auth-context';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -40,16 +27,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    const resolvedRole =
-      (data?.role ?? 'viewer') as AppRole;
-
+    const resolvedRole = (data?.role ?? 'viewer') as AppRole;
     console.log('ROLE RESUELTO:', resolvedRole);
-
     setRole(resolvedRole);
   }
 
   useEffect(() => {
-    if (!supabase) { setLoading(false); return; }
+    if (!supabase) {
+      queueMicrotask(() => setLoading(false));
+      return;
+    }
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
@@ -102,12 +89,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
 }

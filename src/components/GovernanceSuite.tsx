@@ -136,7 +136,7 @@ export function GovernanceSuite({
 
   useEffect(() => {
     if (open) {
-      void loadAll()
+      queueMicrotask(() => void loadAll())
     }
   }, [open])
 
